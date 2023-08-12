@@ -10,15 +10,6 @@
   <p>Check the console!</p>
 </body>
 <script>
-  console.log("Hello World!")
-  /*
-      Computer chooses rock, paper, or scissors at random
-      Player is prompted to enter a choice of rock, paper, or scissors
-      Each player's choice is shown
-      The winner is evaluated
-      Player chooses to play again or quit
-      Game is initialized or exited
-  */
   const choices = ['Rock', 'Paper', 'Scissors'];
   let computerChoice; 
   let playerChoice;
@@ -29,7 +20,7 @@
 
   function getComputerChoice() {
     return choices[Math.floor(Math.random() * 3)];
-  }
+  };
 
   function getPlayerChoice() {
     choice = prompt('Rock, Paper, or Scissors?');
@@ -41,14 +32,14 @@
 
   function capitalize(str) {
     return (str[0].toUpperCase() + str.slice(1).toLowerCase());
-  }
+  };
 
   function evaluateRoundWinner(computerChoice, playerChoice) {
     let winner;
     let resultMessage;
-    if ((playerChoice === 'Rock' && computerChoice === 'Scissors')
-    || (playerChoice === 'Paper' && computerChoice === 'Rock') 
-    || (playerChoice === 'Scissors' && computerChoice === 'Paper')) {
+    if ((playerChoice === 'Rock' && computerChoice === 'Scissors') || 
+    (playerChoice === 'Paper' && computerChoice === 'Rock') || 
+    (playerChoice === 'Scissors' && computerChoice === 'Paper')) {
       winner = 'Player';
       resultMessage = `Player wins! ${playerChoice} beats ${computerChoice}.`;
     } else if (playerChoice === computerChoice) {
@@ -74,10 +65,9 @@
   function playRound() {
     let winner;
     computerChoice = getComputerChoice();
-    playerChoice = getPlayerChoice();
-    while (!(choices.includes(playerChoice)) && playerChoice != null) {
+    do {
       playerChoice = getPlayerChoice();
-    };
+    } while (!(choices.includes(playerChoice)) && playerChoice != null);
     winner = evaluateRoundWinner(computerChoice, playerChoice)
     return winner;
   };
@@ -89,9 +79,8 @@
       return 'Computer wins the game!';
     } else {
       return 'It was a tie!!'
-    }
-  }
-
+    };
+  };
   
   function game() {
     initGame();
@@ -104,17 +93,17 @@
         ++computerWinCount;
       } else {
         ++tieCount;
-      }
-    }
+      };
+    };
 
     let winnerDeclaration = declareOverallWinner(playerWinCount, computerWinCount, tieCount)
 
     console.log(winnerDeclaration);
     console.log(`
-Final score:
-Player: ${playerWinCount}
-Computer: ${computerWinCount}
-Tie: ${tieCount}
+      Final score:
+      Player: ${playerWinCount}
+      Computer: ${computerWinCount}
+      Tie: ${tieCount}
       `
     );
   };
