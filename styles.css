@@ -1,0 +1,92 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+html {
+  box-sizing: border-box;
+  --gray: #d0ccd0;
+  --white: #fbfcff;
+  --rock: #605856;
+  --blue: #1c6e8c;
+  --dark-blue: #274156;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--white);
+  color: var(--blue);
+  font-family: 'Arvo', serif;
+  
+}
+
+/* .container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+.arena {
+  display: flex;
+  flex-direction: column;
+}
+
+.players {
+  display: flex;
+}
+
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.scores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+}
+
+.player-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px 30px;
+}
+
+.game-buttons button {
+    width: 150px;
+    height: 100px;
+    background-color: var(--gray);
+    border: 3px solid var(--dark-blue);
+    border-radius: 4px;
+    box-shadow: 8px 8px 10px var(--dark-blue);
+}
+
+.game-buttons button img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.result .reset-btn {
+  padding: 8px 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+.avatar img {
+  width: 100px;
+  height: auto;
+}
