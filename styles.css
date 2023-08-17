@@ -64,22 +64,38 @@ body {
   margin: 0px 30px;
 }
 
+.messagebox {
+  height: 50px;
+  color: var(--rock);
+  font-size: 2rem;
+}
+
 .game-buttons button {
-    width: 150px;
-    height: 100px;
-    background-color: var(--gray);
-    border: 3px solid var(--dark-blue);
-    border-radius: 4px;
-    box-shadow: 8px 8px 10px var(--dark-blue);
+  width: 150px;
+  height: 100px;
+  background-color: var(--gray);
+  border: 3px solid var(--rock);
+  border-radius: 4px;
+  box-shadow: 8px 8px 10px var(--rock);
+}
+
+.p1 .game-buttons button:hover {
+  border: 3px solid var(--blue);
+  box-shadow: 8px 8px 10px var(--dark-blue);
 }
 
 .game-buttons button img {
   max-width: 100%;
   max-height: 100%;
+  pointer-events: none;
 }
 
-.result .reset-btn {
-  padding: 8px 12px;
+.reset-btn {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  border: 3px solid var(--blue);
+  padding: 6px 12px;
+  border-radius: 5px;
 }
 
 .hidden {
@@ -89,4 +105,25 @@ body {
 .avatar img {
   width: 100px;
   height: auto;
+  margin: 10px;
+}
+
+.player-container .game-buttons button.selected {
+  transform: translate(3px, 5px);
+  border: 3px solid var(--gray);
+  box-shadow: 3px 3px 4px var(--blue);
+}
+
+.winner {
+  border: 3px solid hsl(144, 100%, 25%) !important;
+  box-shadow: 3px 3px 4px hsl(144, 100%, 25%) !important;
+}
+
+.loser {
+  border: 3px solid red !important;
+  box-shadow: 3px 3px 4px red !important;
+}
+
+.score-message {
+  height: 40px;
 }

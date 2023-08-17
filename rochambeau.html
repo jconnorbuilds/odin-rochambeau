@@ -17,35 +17,40 @@
     <div class="players">
       <div class="player-container p1">
         <h1>You</h1>
+        <div class="messagebox p1-messagebox">
+        </div>
         <div class="avatar p1-avatar">
           <img src="./images/businessman.png" alt="">
         </div>
         <div class="game-buttons">
-          <button class="rock">
+          <button class="rock" value="Rock">
             <img src="./images/rock2.png" alt="Rock">
           </button>
-          <button class="paper">
+          <button class="paper" value="Paper">
             <img src="./images/paper2.png" alt="Paper">
           </button>
-          <button class="scissors">
+          <button class="scissors" value="Scissors">
             <img src="./images/scissors2.png" alt="Scissors">
           </button>
         </div>
       </div>
   
-      <div class="player-container cpu">
+      <div class="player-container p2">
         <h1>CPU</h1>
-        <div class="avatar cpu-avatar">
+        <div class="messagebox p2-messagebox">
+          placeholder text
+        </div>
+        <div class="avatar p2-avatar">
           <img src="./images/robot.png" alt="">
         </div>
         <div class="game-buttons">
-          <button class="rock">
+          <button class="rock" value="Rock">
             <img src="./images/rock2.png" alt="Rock">
           </button>
-          <button class="paper">
+          <button class="paper" value="Paper">
             <img src="./images/paper2.png" alt="Paper">
           </button>
-          <button class="scissors">
+          <button class="scissors" value="Scissors">
             <img src="./images/scissors2.png" alt="Scissors">
           </button>
         </div>
@@ -53,14 +58,19 @@
     </div>
     <div class="scoreboard">
       <h2>Score:</h2>
+      <div class="score-message">
+
+      </div>
       <div class="scores">
-        <h2 class="score p1-score">5</h2>
-        <h2 class="score cpu-score">1</h2>
+        <h2 class="score p1-scoreboard">0</h2>
+        <h2 class="score p2-scoreboard">0</h2>
       </div>
     </div>
+      <button class="reset-btn hidden">Next round?</button>
+      <button class="reset-btn hidden">Play again?</button>
   </div>
   <div class="result">
-    <button class="reset-btn hidden">Play again?</button>
+
   </div>
   <div class="footer">
     footer down here
