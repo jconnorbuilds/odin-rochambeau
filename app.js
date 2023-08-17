@@ -23,6 +23,9 @@ const p2Buttons = document.querySelectorAll('.p2 button');
 const p1Scoreboard = document.querySelector('.p1-scoreboard');
 const p2Scoreboard = document.querySelector('.p2-scoreboard');
 
+const newGameButton = document.querySelector('.new-game .btn')
+newGameButton.addEventListener('click', initializeGame)
+
 function highlightBtn() {
   this.classList.add('selected');
 };
@@ -35,7 +38,16 @@ function getComputerChoice() {
   return choices[Math.floor(Math.random() * 3)];
 };
 
-function checkForWinner(playerScore, computerScore) {
+function displayEndSequence() {
+  if (playerScore > computerScore) {
+    scoreMessage.textContent = 'You win the game! Play again?';
+  } else {
+    scoreMessage.textContent = 'Computer wins this game. Play again?'
+  };
+  newGameButton.classList.remove('hidden')
+};
+
+function checkForWinner() {
   return (playerScore >= 5 || computerScore >= 5);
 };
 
@@ -79,28 +91,21 @@ function evaluateRoundWinner(computerChoice, playerChoice) {
     winner = 'Computer';
     scoreMessage.textContent = `Computer wins! ${computerChoice} beats ${playerChoice}.`;
   };
-  
   return winner;
 };
 
-function waitForSpacebar() {
-  window.addEventListener('keydown', (e) => {
-    if (e.code = "Space") {
-      initializeRound();
-      getPlayerChoice();
-    }
-  });
-}
-
-function gameOver() {
-  console.log('Game over!')
-}
-
-function prepareNextRound() {
-  window.addEventListener('keydown', waitForSpacebar);
+function triggerNextRound(e) {
+  console.log(e.code);
+  if (e.code === 'Space') {
+    initializeRound();
+  };
 };
 
-function updateScore(winner) {
+function gameOver() {
+  
+}
+
+function updateScoreboard(winner) {
   if (winner === 'Player') {
     playerScore++;
     p1Message.textContent = 'Nice one!';
@@ -119,89 +124,65 @@ function updateScore(winner) {
   p2Scoreboard.textContent = computerScore;
 
   if (checkForWinner()) {
-    gameOver();
+    displayEndSequence();
   } else {
-    prepareNextRound();
+    focus();
+    window.addEventListener('keydown', triggerNextRound);
+    const nextRoundText = document.createElement('p')
+    nextRoundText.textContent += 'Press spacebar to play next round.';
+    scoreMessage.appendChild(nextRoundText);
   };
 };
 
-function playRound() {
+function determineRoundWinner() {
   /*
   Once player makes their choice, buttons are no longer selectable
-  Player and computer make their choices, and a winner is evaluated.
+  Winner is evaluated from the player and computer choices.
   */
   this.classList.add('selected')
   this.removeEventListener('mouseout', unhighlightBtn)
-  p1Buttons.forEach(btn => btn.removeEventListener('click', playRound));
+  p1Buttons.forEach(btn => btn.removeEventListener('click', determineRoundWinner));
 
   playerChoice = this.value;
-  computerChoice = getComputerChoice();
 
   p2Buttons.forEach((btn) => {
-    console.log(btn.value);
     if (btn.value === computerChoice)  {
       btn.classList.add('selected');
     }
   });
 
   let winner = evaluateRoundWinner(computerChoice, playerChoice);
-  updateScore(winner);
+  updateScoreboard(winner);
 };
 
-function getPlayerChoice() {
+function getPlayersChoices() {
   p1Message.textContent = "Make your move!"
-  p1Buttons.forEach(btn => btn.addEventListener('click', playRound));
-
+  p2Message.textContent = "";
+  p1Buttons.forEach(btn => btn.addEventListener('click', determineRoundWinner));
+  computerChoice = getComputerChoice();
 };
 
 function initializeRound() {
+  scoreMessage.textContent = "";
+  // scoreMessage.removeChild(scoreMessage.firstChild);
   p1Buttons.forEach(btn => btn.addEventListener('mousedown', highlightBtn));
   p1Buttons.forEach(btn => btn.addEventListener('mouseup', unhighlightBtn));
   p1Buttons.forEach(btn => btn.addEventListener('mouseout', unhighlightBtn));
 
   p1Buttons.forEach(btn => btn.classList.remove('winner', 'loser', 'selected'))
   p2Buttons.forEach(btn => btn.classList.remove('winner', 'loser', 'selected'))
+  getPlayersChoices();
 }
 
 function initializeGame() {
   playerScore = 0;
   computerScore = 0;
   tieCount = 0;
-  window.removeEventListener('keydown', waitForSpacebar)
-};
-
-
-function declareOverallWinner(playerScore, computerScore, tieCount) {
-  if (playerScore > computerScore) {
-    return 'Player wins the game!';
-  } else if (computerScore > playerScore) {
-    return 'Computer wins the game!';
-  } else {
-    return 'It was a tie!!'
-  };
-};
-
-function game() {
-  initializeGame();
-  getPlayerChoice();
-  while (playerScore < 5 && computerScore < 5) {
-    // initializeRound();
-    getPlayerChoice();
-  }
-
-  let winnerDeclaration = declareOverallWinner(playerScore, computerScore)
-
-  console.log(winnerDeclaration);
-  console.log(`
-      Final score:
-      Player: ${playerScore}
-      Computer: ${computerScore}
-      Tie: ${tieCount}
-      `
-  );
+  p1Scoreboard.textContent = "0";
+  p2Scoreboard.textContent = "0";
+  newGameButton.classList.add('hidden');
+  window.removeEventListener('keydown', triggerNextRound);
+  initializeRound();
 };
 
 initializeGame();
-getPlayerChoice();
-
-// game();
