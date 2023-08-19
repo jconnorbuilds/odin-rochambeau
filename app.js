@@ -23,8 +23,16 @@ const p2Buttons = document.querySelectorAll('.p2 button');
 const p1Scoreboard = document.querySelector('.p1-scoreboard');
 const p2Scoreboard = document.querySelector('.p2-scoreboard');
 
-const newGameButton = document.querySelector('.new-game .btn')
+const newGameButton = document.querySelector('.new-game.btn')
+const showHideCredits = document.querySelector('.show-credits')
+const credits = document.querySelector('.credits')
+
 newGameButton.addEventListener('click', initializeGame)
+showHideCredits.addEventListener('click', () => {
+  credits.classList.toggle('hidden');
+  showHideCredits.textContent === "Show credits" ? showHideCredits.textContent = "Hide credits" : showHideCredits.textContent = "Show credits"
+  
+})
 
 function highlightBtn() {
   this.classList.add('selected');
@@ -95,10 +103,7 @@ function evaluateRoundWinner(computerChoice, playerChoice) {
 };
 
 function triggerNextRound(e) {
-  console.log(e.code);
-  if (e.code === 'Space') {
-    initializeRound();
-  };
+  if (e.code === 'KeyA') initializeRound();
 };
 
 function gameOver() {
@@ -124,12 +129,12 @@ function updateScoreboard(winner) {
   p2Scoreboard.textContent = computerScore;
 
   if (checkForWinner()) {
+    window.removeEventListener('keydown', triggerNextRound);
     displayEndSequence();
   } else {
-    focus();
     window.addEventListener('keydown', triggerNextRound);
-    const nextRoundText = document.createElement('p')
-    nextRoundText.textContent += 'Press spacebar to play next round.';
+    const nextRoundText = document.createElement('p');
+    nextRoundText.textContent += 'Press "A" to play next round.';
     scoreMessage.appendChild(nextRoundText);
   };
 };
@@ -140,15 +145,16 @@ function determineRoundWinner() {
   Winner is evaluated from the player and computer choices.
   */
   this.classList.add('selected')
-  this.removeEventListener('mouseout', unhighlightBtn)
-  p1Buttons.forEach(btn => btn.removeEventListener('click', determineRoundWinner));
-
-  playerChoice = this.value;
-
+  p1Buttons.forEach(btn => btn.removeEventListener('mousedown', highlightBtn));
+  p1Buttons.forEach(btn => btn.removeEventListener('mouseup', unhighlightBtn));
+  p1Buttons.forEach(btn => btn.removeEventListener('mouseout', unhighlightBtn));
   p2Buttons.forEach((btn) => {
-    if (btn.value === computerChoice)  {
+    if (btn.value === computerChoice) {
       btn.classList.add('selected');
     }
+  p1Buttons.forEach(btn => btn.removeEventListener('click', determineRoundWinner));
+  playerChoice = this.value;
+
   });
 
   let winner = evaluateRoundWinner(computerChoice, playerChoice);
