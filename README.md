@@ -1,4 +1,2 @@
 # odin-rochambeau
-Rock Paper Scissors
-
-A simple browser console version of Rock Paper Scissors.
+Rock Paper Scissors. First to five wins!
