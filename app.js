@@ -26,11 +26,18 @@ const p2Scoreboard = document.querySelector('.p2-scoreboard');
 const newGameButton = document.querySelector('.new-game.btn')
 const showHideCredits = document.querySelector('.show-credits')
 const credits = document.querySelector('.credits')
+const theme1 = document.querySelector('.themes.theme1')
+const theme2 = document.querySelector('.themes.theme2')
+
 
 newGameButton.addEventListener('click', initializeGame)
+
+
 showHideCredits.addEventListener('click', () => {
   credits.classList.toggle('hidden');
   showHideCredits.textContent === "Show credits" ? showHideCredits.textContent = "Hide credits" : showHideCredits.textContent = "Show credits"
+
+
   
 })
 

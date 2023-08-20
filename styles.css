@@ -3,11 +3,12 @@
 
 html {
   box-sizing: border-box;
-  --gray: #d0ccd0;
-  --white: #fbfcff;
-  --rock: #605856;
-  --blue: #1c6e8c;
-  --dark-blue: #274156;
+  --color-highlight: #DEB841;
+  --color-main-bg: #37323E;
+  --color-shadow: #6D6A75;
+  --color-main-text: #DE9E36;
+  --color-shadow-highlight: #BFBDC1;
+
 }
 
 *,
@@ -22,8 +23,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--white);
-  color: var(--blue);
+  background-color: var(--color-main-bg);
+  color: var(--color-main-text);
   font-family: 'Arvo', serif;
   
 }
@@ -31,14 +32,6 @@ body {
 button {
   font-family: inherit;
 }
-
-/* .container {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
-} */
 
 .arena {
   display: flex;
@@ -76,24 +69,30 @@ button {
 
 .messagebox {
   height: 50px;
-  color: var(--rock);
+  color: var(--color-highlight);
   font-size: 2rem;
+}
+
+.game-buttons {
+  display: flex;
+  gap: 12px;
 }
 
 .game-buttons button {
   width: 150px;
   height: 100px;
-  background-color: var(--gray);
-  border: 3px solid var(--rock);
+  background-color: var(--color-main-text);
+  border: 3px solid var(--color-highlight);
   border-radius: 4px;
-  box-shadow: 8px 8px 10px var(--rock);
+  box-shadow: 3px 3px 5px black;
   transition: 70ms;
   outline: none;
 }
 
 .p1 .game-buttons button:hover {
-  border: 3px solid var(--blue);
-  box-shadow: 8px 8px 10px var(--dark-blue);
+  border: 3px solid var(--color-main-text);
+  box-shadow: 0px 0px 10px var(--color-shadow-highlight);
+  background-color: var(--color-highlight);
 }
 
 .game-buttons button img {
@@ -110,10 +109,10 @@ button {
 .new-game.btn {
   height: auto;
   width: 180px;
-  background-color: var(--blue);
-  color: var(--white);
+  background-color: var(--color-shadow);
+  color: var(--color-main-text);
   font-size: 1.5rem;
-  border: 3px solid var(--white);
+  border: 3px solid var(--color-main-text);
   padding: 6px 12px;
   border-radius: 8px;
 }
@@ -130,18 +129,18 @@ button {
 
 .player-container .game-buttons button.selected {
   transform: translate(3px, 5px);
-  border: 3px solid var(--gray);
-  box-shadow: 3px 3px 4px var(--blue);
+  border: 3px solid var(--color-highlight);
+  box-shadow: 0px 0px 4px var(--color-main-text);
 }
 
 .winner {
-  border: 3px solid hsl(144, 100%, 25%) !important;
-  box-shadow: 3px 3px 4px hsl(144, 100%, 25%) !important;
+  border: 6px solid hsl(144, 100%, 25%) !important;
+  box-shadow: 0px 0px 12px hsl(144, 100%, 25%) !important;
 }
 
 .loser {
-  border: 3px solid red !important;
-  box-shadow: 3px 3px 4px red !important;
+  border: 6px solid red !important;
+  box-shadow: 0px 0px 12px red !important;
 }
 
 .score-message {
@@ -157,4 +156,9 @@ button {
 
 .credits a {
   display: block;
+  color: var(--color-shadow-highlight)
+}
+
+.footer {
+  height: 80px;
 }
